@@ -3,6 +3,7 @@ import * as homeController from './controllers/homeController';
 import userController from './controllers/userController';
 import * as authController from './controllers/authController';
 import { uniqueEmail, userExists } from './validators/userValidator';
+import todoController from './controllers/todoController';
 
 const router = Router();
 router.get('/', homeController.index);
@@ -14,6 +15,7 @@ router.post('/register', uniqueEmail, authController.register);
 // router.put('/users/:id', userExists, userController.update);
 // router.delete('/users/:id', userExists, userController.remove);
 router.use('/users', userController);
+router.use('/todos', todoController);
 
 
 export default router;

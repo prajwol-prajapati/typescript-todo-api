@@ -16,7 +16,7 @@ const router = Router();
 
 router.get('/', (req: Request, res: Response, next: NextFunction): void => {
   userService
-    .fetchAll()
+    .fetchAllUser()
     .then((result: {}) => res.status(HTTPStatus.OK).json(result))
     .catch((error: {}) => next(error));
 })

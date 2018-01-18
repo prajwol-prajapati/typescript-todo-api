@@ -3,6 +3,7 @@ import knex from '../config/db';
 import lang from '../utils/lang';
 import UpdateBody from '../domain/UpdateBody';
 import RegisterBody from '../domain/RegisterBody';
+import User from '../models/user';
 
 /**
  * Create user
@@ -11,10 +12,13 @@ import RegisterBody from '../domain/RegisterBody';
  * @returns Promise
  */
 export function createUser(body: RegisterBody): Promise<{}> {
-  return knex('users')
-    .insert({ name: body.name, email: body.email, password: body.password })
-    .returning('*')
-    .then((data: number[]) => ({ data: data[0] }));
+  return new User({ 
+    name: body.name,
+    email: body.email, 
+    password: body.password
+  })
+    .save()
+    .then(user => user.refresh());
 }
 
 /**
@@ -23,9 +27,7 @@ export function createUser(body: RegisterBody): Promise<{}> {
  * @param  {number} id
  */
 export function findById(id: number) {
-  return knex('users')
-    .where('id', '=', id)
-    .first()
+  return new User({ id }).fetch()
     .then((user: {}) => {
       if (!user) {
         throw Boom.notFound(lang.userNotFound);
@@ -41,9 +43,7 @@ export function findById(id: number) {
  * @param  {string} email
  */
 export function findByEmail(email: string) {
-  return knex('users')
-    .where('email', '=', email)
-    .first()
+  return new User({ email }).fetch()
     .then((user: {}) => {
       if (!user) {
         throw Boom.notFound(lang.userNotFound);
@@ -58,10 +58,8 @@ export function findByEmail(email: string) {
  *
  * @returns Promise
  */
-export function fetchAll(): Promise<{}> {
-  return knex('users')
-    .select()
-    .then((data: {}) => ({ data }));
+export function fetchAllUser(): Promise<{}> {
+  return User.fetchAll();
 }
 
 /**
@@ -71,11 +69,10 @@ export function fetchAll(): Promise<{}> {
  * @returns Promise
  */
 export function update(body: UpdateBody): Promise<{}> {
-  return knex('users')
-    .where('id', body.id)
-    .update({ name: body.name, email: body.email, password: body.password })
-    .returning('*')
-    .then((data: number[]) => ({ data: data[0] }));
+  // let id = body.id;
+  return new User({ id: body.id })
+    .save({ name: body.name, email: body.email, password: body.password })
+    .then(user => user.refresh());
 }
 
 /**
@@ -86,13 +83,7 @@ export function update(body: UpdateBody): Promise<{}> {
  */
 export function removeUserById(id: number): Promise<{}> {
   console.log(id);
-  return knex('users')
-    .where('id', id)
-    .delete()
-    .then((user: {}) => ({
-      message: 'User deleted successfully',
-      data: {
-        id: user
-      }
-    }));
+  return new User({ id })
+    .fetch()
+    .then(user => user.destroy());
 }
