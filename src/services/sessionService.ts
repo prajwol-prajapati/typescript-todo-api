@@ -11,7 +11,7 @@ export function createSession(userParams) {
 	
 }
 
-export function DeleteSession(id) {
+export function deleteSession(id: number) {
 	return new Session({ user_id: id })
 	.fetch()
 	.then(session => session.destroy());

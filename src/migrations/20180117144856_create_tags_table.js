@@ -6,13 +6,9 @@ export function up(knex) {
   return knex.schema.createTable('tags', table => {
     table.increments();
     table.string('tag_name').notNull();
-    table
-      .timestamp('created_at')
-      .notNull()
-      .defaultTo(knex.raw('now()'));
-    table.timestamp('updated_at').notNull();
+    table.timestamps(true, true);
   })
-  .createTable('tags_todo_linker', table => {
+  .createTable('tags_todos', table => {
     table
       .integer('todo_id')
       .references('todos.id')

@@ -6,18 +6,27 @@ import createTodo from '../domain/createTodo';
 import Todo from '../models/todo';
 
 export function fetchAllTodo(): Promise<{}> {
-    return Todo.fetchAll()
-      .then((data: {}) => ({ data }));
+    return Todo.fetchPage({
+      page: 1,
+      pageSize: 2
+      
+    })
+    .then((data: {}) => ({ data }));
 }
 
 export function createTodo(body: createTodo, id: number): Promise<{}> {
+  console.log(body);
   return new Todo({ 
     name: body.name,
-    done: false, 
+    done: body.done, 
     user_id: id
   })
     .save()
-    .then((data) => data.refresh());
+    .then((data) => {
+      data.refresh();
+      data.tag().attach(body.tagId);
+      return data;
+    });
 }
 
 export function getTodoById(id: number) {

@@ -8,7 +8,11 @@ const router = Router();
 router.get('/', (req: Request, res: Response, next: NextFunction): void => {
   todoService
     .fetchAllTodo()
-    .then((result: {}) => res.status(HTTPStatus.OK).json(result))
+    .then((result: {}) => {
+      let tempData = result.data.pagination;
+
+      res.status(HTTPStatus.CREATED).json({metadata: tempData, result});
+    })
     .catch((error: {}) => next(error));
 });
 

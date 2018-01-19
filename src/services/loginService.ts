@@ -35,7 +35,7 @@ export async function login(loginParams: LoginBody): Promise<{}> {
     
 }
 
-export function verifyUser(loginParams) {
+export function verifyUser(loginParams: LoginBody) {
     return new User({ email: loginParams.email, password: loginParams.password })
     .fetch()
     .then(user => {

@@ -1,6 +1,7 @@
 import bookshelf from '../config/db';
 import * as Bookshelf from 'bookshelf';
 import User from './user';
+import Tag from './tag';
 
 const TABLE_NAME = 'todos';
 
@@ -15,8 +16,12 @@ class Todo extends bookshelf.Model<Todo> {
         return true;
     }
 
-    user(): Bookshelf.Collection<User> {
+    user(): User {
         return this.hasOne(User);
+    }
+
+    tag(): Bookshelf.Collection<Tag> {
+        return this.belongsToMany(Tag);
     }
 
 }

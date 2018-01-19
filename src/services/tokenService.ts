@@ -1,10 +1,10 @@
 import * as jwt from '../utils/jwt';
 
-export function fetchTokens(params) {
+export function fetchTokens(params: {}) {
   return jwt.generateTokens(params);
 }
 
-export function fetchAccessToken(params) {
+export function fetchAccessToken(params: {}) {
   return jwt.generateAccessToken(params);
 }
 

@@ -17,7 +17,7 @@ class User extends bookshelf.Model<User> {
   get hasTimestamps() {
     return true;
   }
-  todo():Bookshelf.Collection<Todo> {
+  todo(): Bookshelf.Collection<Todo> {
     return this.hasMany(Todo);
   }
 //   token(): Bookshelf.Model<Token> {
