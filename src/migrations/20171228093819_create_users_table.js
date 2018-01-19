@@ -8,10 +8,6 @@ export function up(knex) {
     table.string('name').notNull();
     table.string('email').unique().notNull();
     table.string('password').notNull();
-    table
-      .foreign('todo_id')
-      .references('todos.id')
-      .onDelete('CASCADE');
     table.timestamps(true, true);
   });
 }

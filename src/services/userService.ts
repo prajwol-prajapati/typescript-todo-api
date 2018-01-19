@@ -1,5 +1,5 @@
 import * as Boom from 'boom';
-import knex from '../config/db';
+// import knex from '../config/db';
 import lang from '../utils/lang';
 import UpdateBody from '../domain/UpdateBody';
 import RegisterBody from '../domain/RegisterBody';
