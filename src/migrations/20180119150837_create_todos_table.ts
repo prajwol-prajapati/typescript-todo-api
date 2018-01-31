@@ -1,19 +1,20 @@
+import * as Knex from 'knex';
 /**
  * @param  {object} knex
  * @return {Promise}
  */
-export function up(knex) {
+export function up(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.createTable('todos', table => {
     table.increments();
-    table.string('name').notNull();
+    table.string('name').notNullable();
     table
       .boolean('done')
-      .notNull()
+      .notNullable()
       .defaultTo(false);
     table
       .integer('user_id')
       .unsigned()
-      .notNull();
+      .notNullable();
     table
       .foreign('user_id')
       .references('users.id')
@@ -26,6 +27,6 @@ export function up(knex) {
  * @param  {object} knex
  * @return {Promise}
  */
-export function down(knex) {
+export function down(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.dropTable('todos');
 }

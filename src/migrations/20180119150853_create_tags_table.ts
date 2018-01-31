@@ -1,11 +1,12 @@
+import * as Knex from 'knex';
 /**
  * @param  {object} knex
  * @return {Promise}
  */
-export function up(knex) {
+export function up(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.createTable('tags', table => {
     table.increments();
-    table.string('tag_name').notNull();
+    table.string('tag_name').notNullable();
     table.timestamps(true, true);
   })
   .createTable('tags_todos', table => {
@@ -25,6 +26,6 @@ export function up(knex) {
  * @param  {object} knex
  * @return {Promise}
  */
-export function down(knex) {
-  return knex.schema.dropTable('tags_todo_linker').dropTable('tags');
+export function down(knex: Knex):Knex.SchemaBuilder {
+  return knex.schema.dropTable('tags_todos').dropTable('tags');
 }

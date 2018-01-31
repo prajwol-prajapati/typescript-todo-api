@@ -4,12 +4,13 @@ import LoginBody from '../domain/LoginBody';
 import * as tokenService from './tokenService';
 import { createSession } from './sessionService';
 import User from '../models/user';
+import { Model } from 'bookshelf';
 
 
 export async function login(loginParams: LoginBody): Promise<{}> {
     try {
-        let userDetails: any = await verifyUser(loginParams);
-        console.log(userDetails);
+        let userDetails: User = await verifyUser(loginParams);
+        // console.log(userDetails, '1111111111111111');
         let { id, name, email, password } = userDetails.toJSON();
 
         let tokens = tokenService.fetchTokens(userDetails);

@@ -7,6 +7,7 @@ import todoController from './controllers/todoController';
 import loginController from './controllers/loginController';
 import logoutController from './controllers/logoutController';
 import { ensureToken } from './middlewares/ensureToken';
+import tokenController from './controllers/tokenController';
 
 const router = Router();
 router.get('/', homeController.index);
@@ -15,10 +16,7 @@ router.post('/register', uniqueEmail, authController.register);
 router.use('/login', loginController);
 router.use('/logout', ensureToken, logoutController);
 
-// router.get('/users', userController.index);
-// router.get('/users/:id', userController.show);
-// router.put('/users/:id', userExists, userController.update);
-// router.delete('/users/:id', userExists, userController.remove);
+router.use('/refresh', tokenController);
 router.use('/users', ensureToken, userController);
 router.use('/todos', ensureToken, todoController);
 

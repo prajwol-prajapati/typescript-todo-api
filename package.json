@@ -12,7 +12,9 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@types/jsonwebtoken": "^7.2.5",
     "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "bookshelf": "^0.12.1",
     "bookshelf-camelcase": "^2.0.1",
@@ -62,11 +64,11 @@
     "test:unit": "NODE_ENV=test mocha --recursive test/unit/**/*.test.ts --exit",
     "test:api": "NODE_ENV=test mocha --recursive test/api/**/*.test.ts --exit",
     "test:watch": "NODE_ENV=test mocha --watch --recursive test/**/*.test.ts --exit",
-    "seed": "knex seed:run --knexfile knexfile.js",
-    "migrate": "knex migrate:latest --knexfile knexfile.js",
-    "rollback": "knex migrate:rollback --knexfile knexfile.js",
-    "make:seeder": "knex seed:make --knexfile knexfile.js",
-    "make:migration": "knex migrate:make --knexfile knexfile.js"
+    "seed": "knex seed:run --knexfile knexfile.ts",
+    "migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "rollback": "knex migrate:rollback --knexfile knexfile.ts",
+    "make:seeder": "knex seed:make --knexfile knexfile.ts",
+    "make:migration": "knex migrate:make --knexfile knexfile.ts"
   },
   "engines": {
     "node": ">= 8.9.3",

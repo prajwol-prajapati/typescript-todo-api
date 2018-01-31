@@ -64,6 +64,12 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
+"@types/jsonwebtoken@^7.2.5":
+  version "7.2.5"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-7.2.5.tgz#413159d570ec45fc3e7da7ea3f7bca6fb9300e72"
+  dependencies:
+    "@types/node" "*"
+
 "@types/knex@*":
   version "0.14.1"
   resolved "https://registry.yarnpkg.com/@types/knex/-/knex-0.14.1.tgz#3fdf88600feaad77de245fad4c60a9126ca87193"
@@ -809,7 +815,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.4.3, bluebird@^3.4.6:
+bluebird@^3.4.3, bluebird@^3.4.6, bluebird@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
 

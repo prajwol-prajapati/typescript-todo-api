@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', (req: Request, res: Response, next: NextFunction): void => {
   todoService
     .fetchAllTodo()
-    .then((result: {}) => {
+    .then((result: any) => {
       let tempData = result.data.pagination;
 
       res.status(HTTPStatus.CREATED).json({metadata: tempData, result});

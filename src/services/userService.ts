@@ -4,6 +4,8 @@ import lang from '../utils/lang';
 import UpdateBody from '../domain/UpdateBody';
 import RegisterBody from '../domain/RegisterBody';
 import User from '../models/user';
+import * as BlueBird from 'bluebird';
+import { Collection, Model } from 'bookshelf';
 
 /**
  * Create user
@@ -11,7 +13,7 @@ import User from '../models/user';
  * @param  {RegisterBody} body
  * @returns Promise
  */
-export function createUser(body: RegisterBody): Promise<{}> {
+export function createUser(body: RegisterBody): BlueBird<User> {
   return new User({ 
     name: body.name,
     email: body.email, 
@@ -26,7 +28,7 @@ export function createUser(body: RegisterBody): Promise<{}> {
  *
  * @param  {number} id
  */
-export function findById(id: number) {
+export function findById(id: number): BlueBird<{}> {
   return new User({ id }).fetch()
     .then((user: {}) => {
       if (!user) {
@@ -42,7 +44,7 @@ export function findById(id: number) {
  *
  * @param  {string} email
  */
-export function findByEmail(email: string) {
+export function findByEmail(email: string): BlueBird<{}> {
   return new User({ email }).fetch()
     .then((user: {}) => {
       if (!user) {
@@ -58,7 +60,7 @@ export function findByEmail(email: string) {
  *
  * @returns Promise
  */
-export function fetchAllUser(): Promise<{}> {
+export function fetchAllUser(): BlueBird<Collection<User>> {
   return User.fetchAll();
 }
 
@@ -68,7 +70,7 @@ export function fetchAllUser(): Promise<{}> {
  * @param  {UpdateBody} body
  * @returns Promise
  */
-export function update(body: UpdateBody): Promise<{}> {
+export function update(body: UpdateBody): BlueBird<User> {
   // let id = body.id;
   return new User({ id: body.id })
     .save({ name: body.name, email: body.email, password: body.password })
@@ -81,7 +83,7 @@ export function update(body: UpdateBody): Promise<{}> {
  * @param  {number} id
  * @returns Promise
  */
-export function removeUserById(id: number): Promise<{}> {
+export function removeUserById(id: number): BlueBird<User> {
   console.log(id);
   return new User({ id })
     .fetch()

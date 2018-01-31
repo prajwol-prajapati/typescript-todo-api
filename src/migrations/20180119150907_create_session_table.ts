@@ -1,18 +1,22 @@
+import * as Knex from 'knex';
+
 /**
  * @param  {object} knex
  * @return {Promise}
  */
-export async function up(knex) {
+export function up(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.createTable('session', table => {
     table.increments();
-    table.text('refresh_token').notNull();
+    table.text('refresh_token').notNullable();
     table
       .integer('user_id')
-      .notNull();
+      .references('users.id')
+      .onDelete('CASCADE')
+      .notNullable();
     table
       .string('email')
       .unique()
-      .notNull();
+      .notNullable();
     table.timestamps(true, true);
   });
 }
@@ -21,6 +25,6 @@ export async function up(knex) {
  * @param  {object} knex
  * @return {Promise}
  */
-export function down(knex) {
+export function down(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.dropTable('session');
 }

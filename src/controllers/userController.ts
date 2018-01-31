@@ -44,14 +44,14 @@ router.get('/', (req: Request, res: Response, next: NextFunction): void => {
 router.get('/:id', (req:Request, res: Response, next: NextFunction): void => {
   userService
     .findById(req.params.id)
-    .then((result = {}) => res.status(HTTPStatus.OK).json(result))
+    .then((result: any) => res.status(HTTPStatus.OK).json(result))
     .catch((error: {}) => next(error));
 })
 
 router.post('/',  (req:Request, res: Response, next: NextFunction): void => {
   userService
     .createUser(req.body)
-    .then((result = {}) => res.status(HTTPStatus.CREATED).json(result))
+    .then((result: any) => res.status(HTTPStatus.CREATED).json(result))
     .catch((error: {}) => next(error));
 })
 
