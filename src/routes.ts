@@ -8,6 +8,7 @@ import loginController from './controllers/loginController';
 import logoutController from './controllers/logoutController';
 import { ensureToken } from './middlewares/ensureToken';
 import tokenController from './controllers/tokenController';
+import tagsController from './controllers/tagsController';
 
 const router = Router();
 router.get('/', homeController.index);
@@ -19,7 +20,7 @@ router.use('/logout', ensureToken, logoutController);
 router.use('/refresh', tokenController);
 router.use('/users', ensureToken, userController);
 router.use('/todos', ensureToken, todoController);
-
+router.use('/tags', ensureToken, tagsController)
 
 
 export default router;

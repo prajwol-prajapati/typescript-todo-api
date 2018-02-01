@@ -10,8 +10,8 @@ import { Collection, Model } from 'bookshelf';
 export function fetchAllTodo(): BlueBird<Collection<Todo>> {
     return Todo.fetchPage({
       page: 1,
-      pageSize: 5
-      
+      pageSize: 5,
+      withRelated: ['tags']
     })
     .then((data: {}) => ({ data }));
 }

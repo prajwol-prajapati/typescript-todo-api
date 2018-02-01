@@ -20,7 +20,7 @@ class Todo extends bookshelf.Model<Todo> {
         return this.hasOne(User);
     }
 
-    tag(): Bookshelf.Collection<Tag> {
+    tags(): Bookshelf.Collection<Tag> {
         return this.belongsToMany(Tag);
     }
 
